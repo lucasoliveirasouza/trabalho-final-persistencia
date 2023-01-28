@@ -50,6 +50,6 @@ private static final long serialVersionUID = 1L;
        	UsuarioDao usuarioDao = new UsuarioDao(); 
        	usuarioDao.incluirUsuario(usuario);
     	 
-       	response.sendRedirect("");
+       	response.sendRedirect("ListarUsuarios");
     }
 }

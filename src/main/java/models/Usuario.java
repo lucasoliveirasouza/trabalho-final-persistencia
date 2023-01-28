@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Usuario {
 	private String uf;
 	
 	@ManyToMany
-	private List<Alergia> alergias;
+	private List<Alergia> alergias = new ArrayList<Alergia>();
 	
 	public Usuario() {}
 	
@@ -129,7 +130,11 @@ public class Usuario {
 		this.uf = uf;
 	}
 	
+	public List<Alergia> getAlergias(){
+		return this.alergias;
+	}
 	
-
-	
+	public void setAlergias(ArrayList<Alergia> alergias) {
+		this.alergias = alergias;
+	}
 }
