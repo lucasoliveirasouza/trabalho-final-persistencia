@@ -9,6 +9,7 @@ import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
 import models.Alergia;
+import models.Usuario;
 import models.Vacina;
 
 public class HibernateUtil {
@@ -41,7 +42,8 @@ public class HibernateUtil {
                  Configuration configuration = new Configuration();
 				 configuration.setProperties(settings);
 				 configuration.addAnnotatedClass(Vacina.class);
-				 configuration.addAnnotatedClass(Alergia.class);
+				 configuration.addAnnotatedClass(Alergia.class); 
+				 configuration.addAnnotatedClass(Usuario.class);
 				  ServiceRegistry serviceRegistry = new
 				 StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 				 
