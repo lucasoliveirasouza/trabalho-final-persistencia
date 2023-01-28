@@ -44,7 +44,7 @@
 				<tr>
 					<td><%=alergia.getId() %></td>
 					<td><%=alergia.getNome()%></td>
-					<td><i class="fas fa-edit"></i> </td>
+					<td> <a href="BuscarAlergia?id=<%=alergia.getId()%>"><i class="fas fa-edit"></i> </a> </td>
 					<td><a href="ExcluirAlergia?id=<%=alergia.getId()%>"><i class="fas fa-trash"></i></a></td>
 				</tr>
 			<% } %>
