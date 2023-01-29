@@ -22,6 +22,6 @@ public class ExcluirAgenda extends HttpServlet{
     	throws ServletException, IOException {
     	int id = Integer.parseInt(request.getParameter("id"));
     	agendaDao.deleteAgenda(id);;
-        response.sendRedirect("ListarAgendas");
+        response.sendRedirect("ListarAgendas?tipo=1");
     }
 }

@@ -64,7 +64,7 @@ public class IncluirAgenda extends HttpServlet{
 		 }
 
 		    	 
-		response.sendRedirect("ListarAgendas");
+		response.sendRedirect("ListarAgendas?tipo=1");
 	}
 	 
 	private java.sql.Date novaData(String dataString, int periodicidade, int intervalo) throws ParseException {

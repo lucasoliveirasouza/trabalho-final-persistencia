@@ -37,7 +37,7 @@
 			<tr>
 				<td>Código</td>
 				<td>Titulo</td>
-				<td>Descricao</td>
+				<td>Descrição</td>
 				<td>Doses</td>
 				<td>Periodicidade</td>
 				<td>Intevalo</td>

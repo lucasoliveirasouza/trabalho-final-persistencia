@@ -29,8 +29,12 @@ public class AgendaDao {
         } 
 	}
 	
-	
-    public List <Agenda> getAllAgendas() {
+	/* tipo = 1 ---> retorna todas as agendas
+	 * tipo = 2 ---> retorna lista de agendas agendadas 
+	 * tipo = 3 ---> retorna lista de agendas realizadas
+	 * tipo = 4 ---> retorna lista de agendas canceladas
+	 * tipo = 5 ---> retorna lista de agendas do dia*/
+    public List <Agenda> getAllAgendas(int tipo) {
 
         Transaction transaction = null;
         List <Agenda> listaAgenda = null;
@@ -38,7 +42,16 @@ public class AgendaDao {
             
             transaction = session.beginTransaction();
             
-            listaAgenda = session.createQuery("from Agenda").getResultList();
+            if(tipo == 1)
+            	listaAgenda = session.createQuery("SELECT a FROM Agenda a ORDER BY a.situacao, a.data, a.hora").getResultList();
+            else if(tipo == 2)
+            	listaAgenda = session.createQuery("SELECT a FROM Agenda a where a.situacao=0 ORDER BY a.data, a.hora").getResultList();
+            else if(tipo == 3)
+            	listaAgenda = session.createQuery("SELECT a FROM Agenda a where a.situacao=1 ORDER BY a.data, a.hora").getResultList();
+            else if(tipo == 4)
+            	listaAgenda = session.createQuery("SELECT a FROM Agenda a where a.situacao=2 ORDER BY a.data, a.hora").getResultList();
+            else
+            	listaAgenda = session.createQuery("SELECT a FROM Agenda a WHERE CURRENT_DATE = a.data ORDER BY a.situacao ASC").getResultList();
 
             transaction.commit();
         } catch (Exception e) {

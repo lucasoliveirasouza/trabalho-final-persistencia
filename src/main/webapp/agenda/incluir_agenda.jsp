@@ -71,7 +71,7 @@
 			
 			<input class="btn btn-primary" type="submit" value="Gravar">
 			
-			<a href="../ListarAgendas" class="btn btn-secondary">Voltar ao menu</a>
+			<a href="../ListarAgendas?tipo=1" class="btn btn-secondary">Voltar ao menu</a>
 			
 			
 			

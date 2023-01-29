@@ -24,7 +24,8 @@ public class ListarAgendas extends HttpServlet{
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     	throws ServletException, IOException {
-    	List <Agenda> listaAgenda = agendaDao.getAllAgendas();
+    	int tipo = Integer.parseInt(request.getParameter("tipo"));
+    	List <Agenda> listaAgenda = agendaDao.getAllAgendas(tipo);
         request.setAttribute("lista", listaAgenda);
         RequestDispatcher dispatcher = request.getRequestDispatcher("agenda/agenda.jsp");
         dispatcher.forward(request, response);
