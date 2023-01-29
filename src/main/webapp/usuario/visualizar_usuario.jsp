@@ -2,6 +2,7 @@
 <%@page import="models.Usuario" %>
 <%@page import="models.Alergia" %>
 <%@page import="java.util.List"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -66,7 +67,7 @@
 			<%} %>
 	</div>
 	
-	<a href="ListarVacinas" class="btn btn-secondary mt-3">
+	<a href="ListarUsuarios" class="btn btn-secondary mt-3">
 		<i class="fas fa-arrow-left me-1"></i>
 		Voltar ao menu
 	</a>
