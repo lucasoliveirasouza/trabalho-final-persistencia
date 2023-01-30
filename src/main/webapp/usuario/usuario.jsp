@@ -17,9 +17,12 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-	<div class="container-fluid">
-	
-		
+	<style>
+		.alignCenter{
+			text-align: center;
+		}
+	</style>
+	<div class="container-fluid">	
 		<% if (request.getAttribute("mensagem") != null) {%>
 			<p style="color:red"><%=request.getAttribute("mensagem") %></p>
 		<%} %>
@@ -39,9 +42,9 @@
 			<tr>
 				<td>Código</td>
 				<td>Nome</td>
-				<td>Sexo</td>
-				<td>Alterar</td>
-				<td>Excluir</td>
+				<td class="alignCenter">Sexo</td>
+				<td class="alignCenter">Alterar</td>
+				<td class="alignCenter">Excluir</td>
 			</tr>
 			<% for(Usuario user : usuarios) { %>
 				<tr>
@@ -49,9 +52,13 @@
 					<td>
 						<a href="VisualizarUsuario?id=<%=user.getId()%>"><%=user.getNome()%></a>
 					</td>
-					<td><%=user.getSexo()%></td>
-					<td> <i class="fas fa-edit"></i> </td>
-					<td><a href="ExcluirUsuario?id=<%=user.getId()%>"><i class="fas fa-trash"></i></a></td>
+					<% if (user.getSexo() == 'M') {%>
+						<td class="alignCenter">Masculino</td>
+					<%}else{%>
+						<td class="alignCenter">Feminino</td>
+					<%} %>
+					<td class="alignCenter"> <i class="fas fa-edit"></i> </td>
+					<td class="alignCenter"><a href="ExcluirUsuario?id=<%=user.getId()%>"><i class="fas fa-trash"></i></a></td>
 				</tr>
 			<% } %>
 			

@@ -26,7 +26,7 @@
 			}
 	</style>
 	<div class="w-100 mb-4" style="background: rgba(0, 0, 0, 0.05);">
-		<h1 class="mx-3">Alterar alergia</h3>
+		<h1 class="mx-3">Alterar alergia</h1>
 	</div>
 	<div class="container-fluid">		
 		<form action="AlterarAlergia" method="POST">

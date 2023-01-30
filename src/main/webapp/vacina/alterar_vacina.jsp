@@ -26,7 +26,7 @@
 		}
 	</style>
 	<div class="w-100 mb-4" style="background: rgba(0, 0, 0, 0.05);">
-		<h1 class="mx-3">Alterar Vacina</h3>
+		<h1 class="mx-3">Alterar Vacina</h1>
 	</div>
 	<div class="container-fluid">
 		<form action="AlterarVacina" method="POST">

@@ -17,6 +17,13 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+
+	<style>
+		.alignCenter{
+			text-align: center;
+		}
+	</style>
+	
 	<div class="container-fluid">
 		<% if (request.getAttribute("mensagem") != null) {%>
 			<p style="color:red"><%=request.getAttribute("mensagem") %></p>
@@ -38,11 +45,11 @@
 				<td>Código</td>
 				<td>Titulo</td>
 				<td>Descrição</td>
-				<td>Doses</td>
-				<td>Periodicidade</td>
-				<td>Intevalo</td>
-				<td>Alterar</td>
-				<td>Excluir</td>
+				<td class="alignCenter">Doses</td>
+				<td class="alignCenter">Periodicidade</td>
+				<td class="alignCenter">Intevalo</td>
+				<td class="alignCenter">Alterar</td>
+				<td class="alignCenter">Excluir</td>
 			</tr>
 			<% for(Vacina van : vacinas) { %>
 				<tr>
@@ -51,11 +58,19 @@
 						<a href="VisualizarVacina?id=<%=van.getId()%>"><%=van.getTitulo()%></a>
 					</td>
 					<td><%=van.getDescricao()%></td>
-					<td><%=van.getDoses()%></td>
-					<td><%=van.getPeriodicidade()%></td>
-					<td><%=van.getIntervalo()%></td>
-					<td> <a href="BuscarVacina?id=<%=van.getId()%>"><i class="fas fa-edit"></i> </a> </td>
-					<td><a href="ExcluirVacina?id=<%=van.getId()%>"><i class="fas fa-trash"></i></a></td>
+					<td class="alignCenter"><%=van.getDoses()%></td>
+					<% if (van.getPeriodicidade() == 1) {%>
+						<td class="alignCenter">Dias</td>
+					<%}else if(van.getPeriodicidade() == 2){%>
+						<td class="alignCenter">Semanas</td>
+					<%}else if (van.getPeriodicidade() == 3) {%>
+						<td class="alignCenter">Meses</td>
+					<%}else{%>
+						<td class="alignCenter">Anos</td>
+					<%} %>
+					<td class="alignCenter"><%=van.getIntervalo()%></td>
+					<td class="alignCenter"> <a href="BuscarVacina?id=<%=van.getId()%>"><i class="fas fa-edit"></i> </a> </td>
+					<td class="alignCenter"><a href="ExcluirVacina?id=<%=van.getId()%>"><i class="fas fa-trash"></i></a></td>
 				</tr>
 			<% } %>
 			

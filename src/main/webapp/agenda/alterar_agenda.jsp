@@ -33,7 +33,7 @@
 </style>
 <div class="container-fluid">
 	<div class="d-flex justify-content-center mt-3 w-100">
-		<h4 class="me-2" style="color: var(--bs-gray-700);">Informações sobre a vacina</h5>
+		<h4 class="me-2" style="color: var(--bs-gray-700);">Informações sobre a agenda</h4>
 		<i class="fas fa-info-circle mt-1" style="color: var(--bs-blue); font-size: 1.4rem;"></i>
 	</div>
 	<div class="container-fluid d-flex justify-content-center info-vacina">
@@ -55,9 +55,15 @@
 			
 			<%
 			if(agenda.getSituacao() == Situacao.Agendado){%>
-				<div class = "text-center">
-					<a href="CancelarAgenda?id=<%=agenda.getId()%>" class="btn btn-danger">Cancelar agenda</a>
-					<a href="RealizarAgenda?id=<%=agenda.getId()%>" class="btn btn-success">Agenda Realizada</a>
+				<div class = "text-center mb-3 mt-4">
+					<a href="CancelarAgenda?id=<%=agenda.getId()%>" class="btn btn-danger me-3">
+						Cancelar agenda
+						<i class="fas fa-times mx-1"></i>
+					</a>
+					<a href="RealizarAgenda?id=<%=agenda.getId()%>" class="btn btn-success">
+						Agenda Realizada
+						<i class="fas fa-check mx-1"></i>
+					</a>
 				</div>
 				
 				

@@ -17,6 +17,11 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+	<style>
+		.alignCenter{
+			text-align: center;
+		}
+	</style>
 	<div class="container-fluid">	
 		<% if (request.getAttribute("mensagem") != null) {%>
 			<p style="color:red"><%=request.getAttribute("mensagem") %></p>
@@ -38,15 +43,17 @@
 			<tr>
 				<td>Código</td>
 				<td>Nome</td>
-				<td>Alterar</td>
-				<td>Excluir</td>
+				<td class="alignCenter">Alterar</td>
+				<td class="alignCenter">Excluir</td>
 			</tr>
 			<% for(Alergia alergia : alergias) { %>
 				<tr>
 					<td><%=alergia.getId() %></td>
-					<td><%=alergia.getNome()%></td>
-					<td> <a href="BuscarAlergia?id=<%=alergia.getId()%>"><i class="fas fa-edit"></i> </a> </td>
-					<td><a href="ExcluirAlergia?id=<%=alergia.getId()%>"><i class="fas fa-trash"></i></a></td>
+					<td>
+						<a href="VisualizarAlergia?id=<%=alergia.getId()%>"><%=alergia.getNome()%></a>
+					</td>
+					<td class="alignCenter"> <a href="BuscarAlergia?id=<%=alergia.getId()%>"><i class="fas fa-edit"></i> </a> </td>
+					<td class="alignCenter"><a href="ExcluirAlergia?id=<%=alergia.getId()%>"><i class="fas fa-trash"></i></a></td>
 				</tr>
 			<% } %>
 		</table>

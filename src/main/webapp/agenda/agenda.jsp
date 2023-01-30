@@ -21,68 +21,74 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-	<div class="container-fluid">
-	
-		
+	<style>
+		.alignCenter{
+			text-align: center;
+		}
+	</style>
+	<div class="container-fluid">	
 		<% if (request.getAttribute("mensagem") != null) {%>
 			<p style="color:red"><%=request.getAttribute("mensagem") %></p>
 		<%} %>
 		
-		<div class="row">
+		<div class="row mb-5" style="background: rgba(0, 0, 0, 0.05);">
 			<div class="col-md-6">
 				<h1>Controle de Agendamentos</h1>
 			</div>
 			
-			<div class="col-md-3">
+			<div class="d-flex justify-content-end col-xl-6 mt-2">
+				<div class="col-md-3">
 				<div class="dropdown show">
-				<a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    Filtrar Agendas
-				</a>
+					<a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    	Filtrar Agendas
+					</a>
 				
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					<a class="dropdown-item" href="ListarAgendas?tipo=1">Todas</a>
-				    <a class="dropdown-item" href="ListarAgendas?tipo=2">Agendadas</a>
-				    <a class="dropdown-item" href="ListarAgendas?tipo=3">Realizadas</a>
-				    <a class="dropdown-item" href="ListarAgendas?tipo=4">Canceladas</a>
-				    <a class="dropdown-item" href="ListarAgendas?tipo=5">Agendas do dia</a>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item" href="ListarAgendas?tipo=1">Todas</a>
+				    	<a class="dropdown-item" href="ListarAgendas?tipo=2">Agendadas</a>
+				    	<a class="dropdown-item" href="ListarAgendas?tipo=3">Realizadas</a>
+				    	<a class="dropdown-item" href="ListarAgendas?tipo=4">Canceladas</a>
+				    	<a class="dropdown-item" href="ListarAgendas?tipo=5">Agendas do dia</a>
+					</div>
 				</div>
 			</div>
+			<div class="col-md-4">
+				<a href="agenda/incluir_agenda.jsp" class="btn btn-success">
+					Incluir agendamento
+					<i class="fas fa-plus mx-1"></i>
+				</a>	
 			</div>
-			<div class="col-md-3">
-				<a href="agenda/incluir_agenda.jsp" class="btn btn-success">Incluir agendamento</a>	
-			</div>
+			</div>			
 		</div>
 		<table class="table table-striped">
 			<tr>
 				<td>Nome</td>
 				<td>Vacina</td>
-				<td>Data</td>
+				<td class="alignCenter">Data</td>
 				<td>Hora</td>
 				<td>Situação</td>
-				<td>Alterar Situação</td>
-				<td>Excluir</td>
+				<td class="alignCenter">Alterar Situação</td>
+				<td class="alignCenter">Excluir</td>
 			</tr>
 			<% for(Agenda agenda : agendas) { %>
 				<tr>
 					<td><%=agenda.getUsuario().getNome()%></td>
 					<td><%=agenda.getVacina().getTitulo()%></td>
-					<td><%=dateFormat.format(agenda.getData())%></td>
+					<td class="alignCenter"><%=dateFormat.format(agenda.getData())%></td>
 					<td><%=agenda.getHora()%></td>
 					<td><%=agenda.getSituacao()%></td>
-					<td><a href="VisualizarAgenda?id=<%=agenda.getId()%>"><i class="fas fa-edit"></i></a></td>
-					<td><a href="ExcluirAgenda?id=<%=agenda.getId()%>"><i class="fas fa-trash"></i></a></td>
+					<td class="alignCenter"><a href="VisualizarAgenda?id=<%=agenda.getId()%>"><i class="fas fa-edit"></i></a></td>
+					<td class="alignCenter"><a href="ExcluirAgenda?id=<%=agenda.getId()%>"><i class="fas fa-trash"></i></a></td>
 				</tr>
 			<% } %>
 			
-		</table>
-		
-		
-	
+		</table>	
 			<br/>
-			<a href="index.html" class="btn btn-secondary">Voltar ao menu principal</a>
-		</div>
-	
-	
+			<a href="index.html" class="btn btn-secondary mt-3">
+				<i class="fas fa-arrow-left me-1"></i>
+				Voltar ao menu principal
+			</a>
+		</div>	
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
