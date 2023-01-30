@@ -1,6 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="models.Usuario" %>
 <%@page import="models.Alergia" %>
+<%@page import="dao.AlergiaDao" %>
 <%@page import="java.util.List"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,6 +10,9 @@
 
 <%
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
+
+	AlergiaDao alergiaDao = new AlergiaDao();
+	List<Alergia> alergias = alergiaDao.getAllAlergias();
 %>
 
 <html>
@@ -32,40 +36,43 @@
 	<div class="d-flex justify-content-center mt-3 w-100">
 		<h4 class="me-2" style="color: var(--bs-gray-700);">Informações sobre o usuario</h4>
 		<i class="fas fa-info-circle mt-1" style="color: var(--bs-blue); font-size: 1.4rem;"></i>
+		
+		
 	</div>
 	<div class="container-fluid d-flex justify-content-center info-usuario">
 		<div class="w-100 mt-3">
 			<ul style="list-style-type: none; font-size:18pt; color: var(--bs-gray-700);">
-				<li>Nome do usuario: <%=usuario.getNome()%></li>
+				<li>Nome do usuário: <%=usuario.getNome()%></li>
 			<% if (usuario.getSexo() == 'M') {%>
 				<li>Sexo: Masculino</li>
 			<%}else{%>
 				<li>Sexo: Feminino</li>
 			<%} %>
 			</ul>
+			
+			<div >
+				<% if (usuario.getAlergias().isEmpty()) {%>
+					<h5>O usuário não possui alergias</h5>
+				<%}else{%>
+					<h5>O usuário possui as seguintes alergias:</h5>
+					<table class="table">
+						
+					<% for(Alergia alergia : usuario.getAlergias()) { %>
+						<tr>
+							<td><%=alergia.getNome()%></td>
+						</tr>
+				<% } %>
+				
+					</table>
+				<%} %>
+			</div>
+			
 		</div>
 	</div>	
+	<br/>
+	<br/>
 	
-	<div class="container-fluid">
-		<% if (usuario.getAlergias().isEmpty()) {%>
-				<h4>O usuario nao possui alergias</h1>
-			<%}else{%>
-				<h4>Alergias do usuario</h1>
-				<table class="table table-striped">
-					<tr>
-						<td>Codigo</td>
-						<td>Nome</td>
-					</tr>
-				<% for(Alergia alergia : usuario.getAlergias()) { %>
-					<tr>
-						<td><%=alergia.getId() %></td>
-						<td><%=alergia.getNome()%></td>
-					</tr>
-			<% } %>
-			
-				</table>
-			<%} %>
-	</div>
+	
 	
 	<a href="ListarUsuarios" class="btn btn-secondary mt-3">
 		<i class="fas fa-arrow-left me-1"></i>

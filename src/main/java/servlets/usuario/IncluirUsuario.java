@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import dao.AlergiaDao;
 import dao.UsuarioDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -44,6 +45,12 @@ private static final long serialVersionUID = 1L;
 			e.printStackTrace();
 		}
     	List<Alergia> alergias = new ArrayList<Alergia>();
+    	
+    	AlergiaDao alergiaDao = new AlergiaDao(); 
+       
+       	
+    	Alergia alergia = alergiaDao.getAlergia(5);
+    	alergias.add(alergia);
         	
        	Usuario usuario = new Usuario(nome, data,sexo, logradouro, numero, setor, cidade, uf, alergias);
         	

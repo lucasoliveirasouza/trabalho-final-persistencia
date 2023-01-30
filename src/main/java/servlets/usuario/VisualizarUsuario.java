@@ -28,10 +28,10 @@ public class VisualizarUsuario extends HttpServlet{
     	int id = Integer.parseInt(request.getParameter("id"));
     	Usuario usuario = usuarioDao.getUsuario(id);
     	
-    	Alergia alergia1 = new Alergia(1, "Alergia 1");
-    	ArrayList<Alergia> alergias = new ArrayList<Alergia>();
-    	alergias.add(alergia1);
+    	
+    	List<Alergia> alergias = usuarioDao.getAllAlergiaUsuarios(id);
     	usuario.setAlergias(alergias);
+    	
     	
         request.setAttribute("usuario", usuario);
         RequestDispatcher dispatcher = request.getRequestDispatcher("usuario/visualizar_usuario.jsp");

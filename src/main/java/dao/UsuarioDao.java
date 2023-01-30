@@ -6,7 +6,9 @@ import javax.persistence.EntityManager;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
+import models.Alergia;
 import models.Usuario;
 import util.HibernateUtil;
 
@@ -51,6 +53,29 @@ public class UsuarioDao {
             e.printStackTrace();
         }
         return listaUsuario;
+    }
+    
+    public List <Alergia> getAllAlergiaUsuarios(int id) {
+
+        Transaction transaction = null;
+        List <Alergia> listaAlergiasUser = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            
+            transaction = session.beginTransaction();
+            
+            Query query =session.createQuery("Select p from Alergia p join fetch p.usuarios f where f.id=:id");
+            query.setParameter("id", id);
+            
+            listaAlergiasUser  = query.getResultList();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return listaAlergiasUser;
     }
     
     public void deleteUsuario(int id) {

@@ -4,11 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 @Entity
 public class Usuario {
@@ -24,7 +20,7 @@ public class Usuario {
 	private String cidade;
 	private String uf;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "usuarios")
 	private List<Alergia> alergias = new ArrayList<Alergia>();
 	
 	public Usuario() {}
@@ -134,7 +130,7 @@ public class Usuario {
 		return this.alergias;
 	}
 	
-	public void setAlergias(ArrayList<Alergia> alergias) {
+	public void setAlergias(List<Alergia> alergias) {
 		this.alergias = alergias;
 	}
 }
