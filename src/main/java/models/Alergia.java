@@ -3,6 +3,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,9 @@ public class Alergia {
     private int id;
 	private String nome;
 	
-	@ManyToMany
+	@ManyToMany(cascade = {
+	        CascadeType.ALL
+	    })
 	@JoinTable(
 	 name = "alergias_usuarios",
 	 joinColumns = @JoinColumn(name = "alergia_id"),
@@ -53,6 +56,16 @@ public class Alergia {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+	
+	
 	
 	
 }

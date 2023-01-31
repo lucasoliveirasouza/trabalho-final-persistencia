@@ -72,6 +72,21 @@
 	<br/>
 	<br/>
 	
+	<div class="row">
+		<div class="col-md-3 form-group">
+					<label>Alergia:</label>
+					<select name="selAlergia" class="form-control">
+						<% for(Alergia alergia : alergias) { %>
+							<option value="<%=alergia.getId() %>"><%=alergia.getNome() %></option>
+							
+						<% } %>
+					</select>
+			
+		</div>
+		<div class="col-md-3">
+			<a href="AdicionarAlergiaUsuario?id=<%=usuario.getId()%>" class="btn btn-secondary mt-3 ">Incluir alergia<a/>
+		</div>
+	</div>
 	
 	
 	<a href="ListarUsuarios" class="btn btn-secondary mt-3">

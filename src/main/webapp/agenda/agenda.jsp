@@ -67,7 +67,7 @@
 				<td class="alignCenter">Data</td>
 				<td>Hora</td>
 				<td>Situação</td>
-				<td class="alignCenter">Alterar Situação</td>
+				<td class="alignCenter">Detalhes</td>
 				<td class="alignCenter">Excluir</td>
 			</tr>
 			<% for(Agenda agenda : agendas) { %>
