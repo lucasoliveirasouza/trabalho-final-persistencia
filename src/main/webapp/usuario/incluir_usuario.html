@@ -5,29 +5,29 @@
 <title>Adicionar usuario</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+<link rel="stylesheet" href="../css/geral.css">
 </head>
 <body>
 	<div class="w-100 mb-4" style="background: rgba(0, 0, 0, 0.05);">
 		<h1 class="mx-3">Incluir novo usuario</h1>
 	</div>
-	<div class="container-fluid">
-		<form action="../IncluirUsuario" method="POST">
-			<div class="row">
-			
-				
+	<div class="container-fluid" id="container">
+		<form action="../IncluirUsuario" method="POST" id="form0">
+			<div class="row">			
 				<div class="form-group col-md-4">
 					<label>Nome:</label>
-					<input class="form-control" type="text" value="" name="txtNome" />
+					<input id="nome" class="form-control" type="text" value="" name="txtNome" />
 				</div>
 				
 				<div class="form-group col-md-4">
 					<label>Data de Nascimento:</label>
-					<input class="form-control" type="date" value="" name="dtDataNasc" />
+					<input id="dataNascimento" class="form-control" type="date" value="" name="dtDataNasc" />
 				</div>
 				
 				<div class="form-group col-md-4">
 					<label>Sexo:</label>
-					<select name="selSe>xo" class="form-control">
+					<select name="selSexo" class="form-control">
 						<option value="F">Feminino</option>
 						<option value="M">Masculino</option>
 					</select>
@@ -35,22 +35,22 @@
 				
 				<div class="form-group col-md-8">
 					<label>Logradouro:</label>
-					<input class="form-control" type="text" value="" name="txtLogradouro" />
+					<input id="logradouro" class="form-control" type="text" value="" name="txtLogradouro" />
 				</div>
 				
 				<div class="form-group col-md-4">
 					<label>Número:</label>
-					<input class="form-control" type="text" value="" name="txtNumero" />
+					<input id="numero" class="form-control" type="text" value="" name="txtNumero" />
 				</div>
 				
 				<div class="form-group col-md-4">
 					<label>Setor:</label>
-					<input class="form-control" type="text" value="" name="txtSetor" />
+					<input id="setor" class="form-control" type="text" value="" name="txtSetor" />
 				</div>
 				
 				<div class="form-group col-md-4">
 					<label>Cidade:</label>
-					<input class="form-control" type="text" value="" name="txtCidade" />
+					<input id="cidade" class="form-control" type="text" value="" name="txtCidade" />
 				</div>
 				
 				<div class="form-group col-md-4">
@@ -87,22 +87,83 @@
 						
 					</select>
 				</div>
-				
 			</div>
-			
-	
 			<br>
 			
 			<a href="../ListarUsuarios" class="btn btn-secondary mt-3 me-2">
 				<i class="fas fa-arrow-left me-1"></i>
 				Voltar ao menu
 			</a>			
-			<button class="btn btn-primary mt-3" type="submit">
+			<button class="btn btn-primary mt-3" type="button" onclick="aoIncluirUsuario(this)">
 				Gravar
 				<i class="fas fa-save mx-1"></i>
 			</button>
 		</form>
 	</div>
+	<script defer>
+		const ehCampoValido = {
+				"nome": () => {
+					const nome = document.getElementById('nome');
+					if(!nome.value.trim()){
+						monteMensagem(nome, 'Nome', 'É necessário informar o nome do usuario');
+						return false;
+					}
+					removaEstadoInvalido(nome);
+					return true;
+				},
+				"dataNascimento": () => {
+					const dataNascimento = document.getElementById('dataNascimento');
+					if(!dataNascimento.value.trim()){
+						monteMensagem(dataNascimento, 'Data de nascimento', 'É necessário informar a data de nascimento');
+						return false;
+					}
+					removaEstadoInvalido(dataNascimento);
+					return true;
+				},
+				"logradouro": () => {
+					const logradouro = document.getElementById('logradouro');
+					if(!logradouro.value.trim()){
+						monteMensagem(logradouro, 'Logradouro', 'É necessário informar o logradouro');
+						return false;
+					}
+					removaEstadoInvalido(logradouro);
+					return true;
+				},
+				"numero": () => {
+					const numero = document.getElementById('numero');
+					if(!numero.value.trim()){
+						monteMensagem(numero, 'Numero', 'É necessário informar o numero');
+						return false;
+					}
+					removaEstadoInvalido(numero);
+					return true;
+				},
+				"cidade": () => {
+					const cidade = document.getElementById('cidade');
+					if(!cidade.value.trim()){
+						monteMensagem(cidade, 'Cidade', 'É necessário informar a cidade');
+						return false;
+					}
+					removaEstadoInvalido(cidade);
+					return true;
+				}
+		};
+
+		function aoIncluirUsuario(ev){
+			let invalido;
+			if(!ehCampoValido["nome"]()) invalido = true;
+			if(!ehCampoValido["dataNascimento"]())invalido = true;
+			if(!ehCampoValido["logradouro"]())invalido = true;
+			if(!ehCampoValido["numero"]())invalido = true;
+			if(!ehCampoValido["cidade"]())invalido = true;						
+			if(invalido) return;
+			
+			const formulario = document.getElementById('form0');
+			formulario.submit();
+		}
+	</script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+	<script src="../js/modal.js" crossorigin="anonymous"></script>
+	<script src="../js/geral.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -13,7 +13,7 @@
             <property name="javax.persistence.jdbc.url"
                       value="jdbc:postgresql://localhost:5432/vacinacao"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>
-            <property name="javax.persistence.jdbc.password" value="lucas321"/>
+            <property name="javax.persistence.jdbc.password" value="vitor2303"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
 

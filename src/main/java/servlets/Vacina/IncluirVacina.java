@@ -30,7 +30,7 @@ public class IncluirVacina  extends HttpServlet {
         	
        	VacinaDao vdao = new VacinaDao(); 
        	vdao.incluir(vacina);
-    	 
+       	
        	response.sendRedirect("ListarVacinas");
     }
 

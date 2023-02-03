@@ -30,7 +30,7 @@ public class HibernateUtil {
                  
                  settings.put(Environment.USER, "postgres");
                 
-                 settings.put(Environment.PASS, "lucas321");
+                 settings.put(Environment.PASS, "vitor2303");
                 
                  settings.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
                 
