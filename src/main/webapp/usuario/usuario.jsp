@@ -1,12 +1,16 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="models.Usuario" %>
 <%@page import="java.util.List"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <%
 	List<Usuario> usuarios = (List<Usuario>) request.getAttribute("lista");
+	DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 %>
 
 <html>
@@ -42,8 +46,9 @@
 			<tr>
 				<td>Código</td>
 				<td>Nome</td>
+				<td class="alignCenter">Data de Nascimento</td>
 				<td class="alignCenter">Sexo</td>
-				<td class="alignCenter">Alterar</td>
+				<td class="alignCenter">Cidade</td>
 				<td class="alignCenter">Excluir</td>
 			</tr>
 			<% for(Usuario user : usuarios) { %>
@@ -52,12 +57,13 @@
 					<td>
 						<a href="VisualizarUsuario?id=<%=user.getId()%>"><%=user.getNome()%></a>
 					</td>
+					<td class="alignCenter"><%=dateFormat.format(user.getData_nascimento())%></td>
 					<% if (user.getSexo() == 'M') {%>
 						<td class="alignCenter">Masculino</td>
 					<%}else{%>
 						<td class="alignCenter">Feminino</td>
 					<%} %>
-					<td class="alignCenter"> <i class="fas fa-edit"></i> </td>
+					<td class="alignCenter"><%=user.getCidade() %></td>
 					<td class="alignCenter"><a href="ExcluirUsuario?id=<%=user.getId()%>"><i class="fas fa-trash"></i></a></td>
 				</tr>
 			<% } %>

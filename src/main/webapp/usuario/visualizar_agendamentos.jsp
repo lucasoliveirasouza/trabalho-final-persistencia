@@ -33,32 +33,10 @@
 		
 		<div class="row mb-5" style="background: rgba(0, 0, 0, 0.05);">
 			<div class="col-md-6">
-				<h1>Controle de Agendamentos</h1>
+				<h1>Agendas do Usuário</h1>
 			</div>
 			
-			<div class="d-flex justify-content-end col-xl-6 mt-2">
-				<div class="col-md-3">
-				<div class="dropdown show">
-					<a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    	Filtrar Agendas
-					</a>
 				
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<a class="dropdown-item" href="ListarAgendas?tipo=1">Todas</a>
-				    	<a class="dropdown-item" href="ListarAgendas?tipo=2">Agendadas</a>
-				    	<a class="dropdown-item" href="ListarAgendas?tipo=3">Realizadas</a>
-				    	<a class="dropdown-item" href="ListarAgendas?tipo=4">Canceladas</a>
-				    	<a class="dropdown-item" href="ListarAgendas?tipo=5">Agendas do dia</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<a href="agenda/incluir_agenda.jsp" class="btn btn-success">
-					Incluir agendamento
-					<i class="fas fa-plus mx-1"></i>
-				</a>	
-			</div>
-			</div>			
 		</div>
 		<table class="table table-striped">
 			<tr>
@@ -67,8 +45,6 @@
 				<td class="alignCenter">Data</td>
 				<td>Hora</td>
 				<td>Situação</td>
-				<td class="alignCenter">Detalhes</td>
-				<td class="alignCenter">Excluir</td>
 			</tr>
 			<% for(Agenda agenda : agendas) { %>
 				<tr>
@@ -77,14 +53,13 @@
 					<td class="alignCenter"><%=dateFormat.format(agenda.getData())%></td>
 					<td><%=agenda.getHora()%></td>
 					<td><%=agenda.getSituacao()%></td>
-					<td class="alignCenter"><a href="VisualizarAgenda?id=<%=agenda.getId()%>"><i class="fas fa-info-circle"></i></a></td>
-					<td class="alignCenter"><a href="ExcluirAgenda?id=<%=agenda.getId()%>"><i class="fas fa-trash"></i></a></td>
+					
 				</tr>
 			<% } %>
 			
 		</table>	
 			<br/>
-			<a href="index.html" class="btn btn-secondary mt-3">
+			<a href="ListarUsuarios" class="btn btn-secondary mt-3">
 				<i class="fas fa-arrow-left me-1"></i>
 				Voltar ao menu principal
 			</a>
