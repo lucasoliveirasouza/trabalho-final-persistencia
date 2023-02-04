@@ -19,13 +19,7 @@ public class Alergia {
     private int id;
 	private String nome;
 	
-	@ManyToMany(cascade = {
-	        CascadeType.ALL
-	    })
-	@JoinTable(
-	 name = "alergias_usuarios",
-	 joinColumns = @JoinColumn(name = "alergia_id"),
-	 inverseJoinColumns = @JoinColumn(name = "usuario_id"))
+	@ManyToMany(mappedBy = "alergias")
 	List<Usuario> usuarios = new ArrayList<Usuario>();
 	
 	public Alergia() {

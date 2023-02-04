@@ -7,6 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import javax.persistence.EntityManager;
+
 import dao.AgendaDao;
 import dao.UsuarioDao;
 import dao.VacinaDao;
@@ -19,10 +21,12 @@ import models.Agenda;
 import models.Situacao;
 import models.Usuario;
 import models.Vacina;
+import util.JPAUtil;
 
 
 @WebServlet("/IncluirAgenda")
 public class IncluirAgenda extends HttpServlet{
+	private EntityManager en;
 	 protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			 throws ServletException, IOException {
 		    	
@@ -42,14 +46,16 @@ public class IncluirAgenda extends HttpServlet{
 		 }
 		 
 		 java.sql.Date dataSituacao = null;
-		
-		 UsuarioDao usuarioDao = new UsuarioDao();
+		 en = JPAUtil.getEntityManager();
+		 UsuarioDao usuarioDao = new UsuarioDao(en);
 		 Usuario usuario = usuarioDao.getUsuario(idUsuario);
 		 
-		 VacinaDao vacinaDao = new VacinaDao();
+		 
+		 VacinaDao vacinaDao = new VacinaDao(en);
 		 Vacina vacina = vacinaDao.getVacina(idVacina);
 		 
-		 AgendaDao agendaDao = new AgendaDao(); 
+		 
+	    	AgendaDao agendaDao = new AgendaDao(en);
 		 
 		 for(int i = 0; i<vacina.getDoses();i++) {
 			 Agenda agenda = new Agenda(data,hora,Situacao.Agendado,dataSituacao, observacoes,usuario,vacina);

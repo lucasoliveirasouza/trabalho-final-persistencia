@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import dao.UsuarioDao;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -13,24 +15,22 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import models.Alergia;
 import models.Usuario;
+import util.JPAUtil;
 
 @WebServlet("/VisualizarUsuario")
 public class VisualizarUsuario extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-    private UsuarioDao usuarioDao;
-
-    public void init() {
-    	usuarioDao = new UsuarioDao();
-    }
+	private EntityManager en;
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     	throws ServletException, IOException {
     	int id = Integer.parseInt(request.getParameter("id"));
+    	
+    	en = JPAUtil.getEntityManager();
+    	UsuarioDao usuarioDao = new UsuarioDao(en);
+    	
     	Usuario usuario = usuarioDao.getUsuario(id);
     	
-    	
-    	List<Alergia> alergias = usuarioDao.getAllAlergiaUsuarios(id);
-    	usuario.setAlergias(alergias);
     	
     	
         request.setAttribute("usuario", usuario);

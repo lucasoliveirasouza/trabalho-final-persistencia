@@ -3,6 +3,9 @@ package servlets.Vacina;
 import java.io.IOException;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
+
 import dao.VacinaDao;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -11,18 +14,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import models.Vacina;
+import util.JPAUtil;
 
 @WebServlet("/ListarVacinas")
 public class ListarVacinas  extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-    private VacinaDao vacinaDao;
+    private EntityManager en;
 
-    public void init() {
-    	vacinaDao = new VacinaDao();
-    }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     	throws ServletException, IOException {
+    	en = JPAUtil.getEntityManager();
+    	VacinaDao vacinaDao = new VacinaDao(en);
     	List <Vacina> listavacina = vacinaDao.getAllVacinas();
         request.setAttribute("lista", listavacina);
         RequestDispatcher dispatcher = request.getRequestDispatcher("vacina/vacina.jsp");

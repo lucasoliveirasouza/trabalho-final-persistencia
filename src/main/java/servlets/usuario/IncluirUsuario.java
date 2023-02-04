@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import dao.AlergiaDao;
 import dao.UsuarioDao;
 import jakarta.servlet.ServletException;
@@ -17,11 +19,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import models.Alergia;
 import models.Usuario;
+import util.JPAUtil;
 
 
 @WebServlet("/IncluirUsuario")
 public class IncluirUsuario extends HttpServlet{
 	private static final long serialVersionUID = 1L;
+	private EntityManager en;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     	throws ServletException, IOException {
@@ -45,15 +49,17 @@ public class IncluirUsuario extends HttpServlet{
 		}
     	List<Alergia> alergias = new ArrayList<Alergia>();
     	
-    	AlergiaDao alergiaDao = new AlergiaDao(); 
-       
+    	
+        	
        	
+        	
+       	en = JPAUtil.getEntityManager();
+    	UsuarioDao usuarioDao = new UsuarioDao(en);
+    	AlergiaDao alergiaDao = new AlergiaDao(en);
     	Alergia alergia = alergiaDao.getAlergia(5);
+    	
     	alergias.add(alergia);
-        	
-       	Usuario usuario = new Usuario(nome, data,sexo, logradouro, numero, setor, cidade, uf, alergias);
-        	
-       	UsuarioDao usuarioDao = new UsuarioDao(); 
+    	Usuario usuario = new Usuario(nome, data,sexo, logradouro, numero, setor, cidade, uf, alergias);
        	usuarioDao.incluirUsuario(usuario);
     	 
        	response.sendRedirect("ListarUsuarios");

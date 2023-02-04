@@ -6,16 +6,22 @@
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
+<%@page import="javax.persistence.EntityManager"%>
+<%@page import="util.JPAUtil"%>
+
+
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <%
-	Usuario usuario = (Usuario) request.getAttribute("usuario");
-
-	AlergiaDao alergiaDao = new AlergiaDao();
+	EntityManager en;
+	en = JPAUtil.getEntityManager();
+	AlergiaDao alergiaDao = new AlergiaDao(en);
 	List<Alergia> alergias = alergiaDao.getAllAlergias();
+	Usuario usuario = (Usuario) request.getAttribute("usuario");
+	
 	DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 %>
 
@@ -44,56 +50,65 @@
 		
 	</div>
 	<div class="container-fluid d-flex justify-content-center info-usuario">
-		<div class="w-100 mt-3">
-			<ul style="list-style-type: none; font-size:18pt; color: var(--bs-gray-700);">
-				<li>Nome do usuário: <%=usuario.getNome()%></li>
-			<% if (usuario.getSexo() == 'M') {%>
-				<li>Sexo: Masculino</li>
-			<%}else{%>
-				<li>Sexo: Feminino</li>
-			<%} %>
-				
-				<li>Data de nascimento: <%=dateFormat.format(usuario.getData_nascimento())%></li>
-				<li>Endereço: <%=usuario.getLogradouro() + ", "+ usuario.getNumero() + ", "+usuario.getSetor() + ", " + usuario.getCidade() + " - " + usuario.getUf()%></li>
-			</ul>
-			
-			<div >
-				<% if (usuario.getAlergias().isEmpty()) {%>
-					<h5>O usuário não possui alergias</h5>
+	
+		<form action="AdicionarAlergiaUsuario" method="POST">
+			<div class="w-100 mt-3">
+				<ul style="list-style-type: none; font-size:18pt; color: var(--bs-gray-700);">
+					<li>Nome do usuário: <%=usuario.getNome()%></li>
+				<% if (usuario.getSexo() == 'M') {%>
+					<li>Sexo: Masculino</li>
 				<%}else{%>
-					<h5>O usuário possui as seguintes alergias:</h5>
-					<table class="table">
-						
-					<% for(Alergia alergia : usuario.getAlergias()) { %>
-						<tr>
-							<td><%=alergia.getNome()%></td>
-						</tr>
-				<% } %>
-				
-					</table>
+					<li>Sexo: Feminino</li>
+					
 				<%} %>
+					
+					<li>Data de nascimento: <%=dateFormat.format(usuario.getData_nascimento())%></li>
+					<li>Endereço: <%=usuario.getLogradouro() + ", "+ usuario.getNumero() + ", "+usuario.getSetor() + ", " + usuario.getCidade() + " - " + usuario.getUf()%></li>
+				</ul>
+				<div >
+					<% if (usuario.getAlergias().isEmpty()) {%>
+						<h5>O usuário não possui alergias</h5>
+					<%}else{%>
+						<h5>O usuário possui as seguintes alergias:</h5>
+						<table class="table">
+							
+						<% for(Alergia alergia : usuario.getAlergias()) { %>
+							<tr>
+								<td><%=alergia.getNome()%></td>
+							</tr>
+					<% } %>
+					
+						</table>
+					<%} %>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-6 form-group">
+								<label>Alergia:</label>
+								<select name="selAlergia" class="form-control">
+									<%for(Alergia alergia : alergias) { %>
+										<option value="<%=alergia.getId() %>"><%=alergia.getNome() %></option>
+										
+									<% } %>
+								</select>
+								<input type="text" value="<%=usuario.getId()%>" hidden name="txtId" />
+						
+					</div>
+					<div class="col-md-3">
+						<button class="btn btn-primary mt-3" type="submit">
+							Incluir alergia
+							
+						</button>
+					</div>
+				</div> 
+					
 			</div>
-			
-		</div>
+		</form>
 	</div>	
 	<br/>
 	<br/>
 	
-	 <div class="row">
-		<div class="col-md-3 form-group">
-					<label>Alergia:</label>
-					<select name="selAlergia" class="form-control">
-						<% for(Alergia alergia : alergias) { %>
-							<option value="<%=alergia.getId() %>"><%=alergia.getNome() %></option>
-							
-						<% } %>
-					</select>
-			
-		</div>
-		<div class="col-md-3">
-			<a href="AdicionarAlergiaUsuario?id=<%=usuario.getId()%>" class="btn btn-secondary mt-3 ">Incluir alergia<a/>
-		</div>
-	</div>
+	
 	
 	<div class = "text-center mb-3 mt-4">
 		<a href="ListarUsuarios" class="btn btn-secondary mt-3">
@@ -105,6 +120,8 @@
 			Visualizar Agendas
 		</a>
 	</div>
+	
+	
 	
 </div>
 	

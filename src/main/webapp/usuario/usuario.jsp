@@ -70,6 +70,7 @@
 			
 		</table>
 		<br/>
+		
 		<a href="index.html" class="btn btn-secondary mt-3">
 			<i class="fas fa-arrow-left me-1"></i>
 			Voltar ao menu principal

@@ -2,6 +2,8 @@ package servlets.alergia;
 
 import java.io.IOException;
 
+import javax.persistence.EntityManager;
+
 import dao.AlergiaDao;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -10,18 +12,21 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import models.Alergia;
+import util.JPAUtil;
 
 @WebServlet("/BuscarAlergia")
 public class BuscarAlergia extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-    private AlergiaDao alergiaDao;
+	private EntityManager en;
 
-    public void init() {
-    	alergiaDao = new AlergiaDao();
-    }
+   
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
+		
+		en = JPAUtil.getEntityManager();
+    	AlergiaDao alergiaDao = new AlergiaDao(en);
+    	
         Alergia alergia = alergiaDao.getAlergia(id);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("alergia/alterar_alergia.jsp");

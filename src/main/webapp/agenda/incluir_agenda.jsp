@@ -4,6 +4,8 @@
 <%@page import="models.Vacina" %>
 <%@page import="dao.VacinaDao" %>
 <%@page import="java.util.List"%>
+<%@page import="javax.persistence.EntityManager"%>
+<%@page import="util.JPAUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
     
@@ -11,11 +13,16 @@
 <!DOCTYPE html>
 
   <%
-  	UsuarioDao userdao = new UsuarioDao();
-	List<Usuario> usuarios = userdao.getAllUsuarios();
+  EntityManager en;
+  en = JPAUtil.getEntityManager();
+	VacinaDao vacinaDao = new VacinaDao(en);
+	List <Vacina> vacinas = vacinaDao.getAllVacinas();
+  
+  
+  UsuarioDao usuarioDao = new UsuarioDao(en);
+	List <Usuario> usuarios = usuarioDao.getAllUsuarios();
 	
-	VacinaDao vacinaDao = new VacinaDao();
-	List<Vacina> vacinas = vacinaDao.getAllVacinas();
+	
 %>
 <html>
 <head>

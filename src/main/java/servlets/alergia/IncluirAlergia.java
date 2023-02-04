@@ -2,6 +2,8 @@ package servlets.alergia;
 
 import java.io.IOException;
 
+import javax.persistence.EntityManager;
+
 import dao.AlergiaDao;
 import dao.VacinaDao;
 import jakarta.servlet.ServletException;
@@ -11,11 +13,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import models.Alergia;
 import models.Vacina;
+import util.JPAUtil;
 
 @WebServlet("/IncluirAlergia")
 public class IncluirAlergia extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
+	private EntityManager en;
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     	throws ServletException, IOException {
@@ -24,8 +28,10 @@ public class IncluirAlergia extends HttpServlet{
        	
         Alergia alergia = new Alergia(nome);
        
-        	
-       	AlergiaDao alergiaDao = new AlergiaDao(); 
+    	en = JPAUtil.getEntityManager();
+    	AlergiaDao alergiaDao = new AlergiaDao(en);
+    	
+       
        	alergiaDao.incluirAlergia(alergia);
     	 
        	response.sendRedirect("ListarAlergias");
