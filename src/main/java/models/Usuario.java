@@ -20,7 +20,11 @@ public class Usuario {
 	private String cidade;
 	private String uf;
 	
-	@ManyToMany(mappedBy = "usuarios")
+	@ManyToMany
+	@JoinTable(
+	 name = "usuarios_alergias",
+	 joinColumns = @JoinColumn(name = "usuarios_id"),
+	 inverseJoinColumns = @JoinColumn(name = "alergias_id"))
 	private List<Alergia> alergias = new ArrayList<Alergia>();
 	
 	public Usuario() {}

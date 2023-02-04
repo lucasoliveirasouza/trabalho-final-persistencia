@@ -2,102 +2,55 @@ package dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import models.Alergia;
+
 import util.HibernateUtil;
 
 public class AlergiaDao {
 	
-	public void incluirAlergia(Alergia alergia){
-		
-		Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-        	
-            // start a transaction
-            transaction = session.beginTransaction();
-            
-            session.save(alergia);
-            // commit transaction
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        } 
-	}
-	
-	
-    public List <Alergia> getAllAlergias() {
-
-        Transaction transaction = null;
-        List <Alergia> listaAlergia = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            
-            transaction = session.beginTransaction();
-            
-            listaAlergia = session.createQuery("from Alergia").getResultList();
-
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-        return listaAlergia;
+	private EntityManager entityManager;
+    public AlergiaDao(EntityManager entityManager){
+        this.entityManager = entityManager;
     }
     
-    public void deleteAlergia(int id) {
-
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-
-            Alergia alergia = session.get(Alergia.class, id);
-            if (alergia != null) {
-                session.delete(alergia);
-            }
-
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
+    public void incluirAlergia(Alergia alergia){
+        entityManager.getTransaction().begin();
+        entityManager.persist(alergia);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
     
-    public void alterarAlergia(Alergia alergia) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            session.update(alergia);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
+    public List<Alergia> getAllAlergias(){
+        entityManager.getTransaction().begin();
+        List<Alergia> alergias = entityManager.createQuery("select v from Alergia as v").getResultList();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return alergias;
     }
     
-    public Alergia getAlergia(int id) {
-
-        Transaction transaction = null;
-        Alergia alergia = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            alergia = session.get(Alergia.class, id);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
+    public Alergia getAlergia(int id){
+        entityManager.getTransaction().begin();
+        Alergia alergia = entityManager.find(Alergia.class,id);
+        entityManager.getTransaction().commit();
         return alergia;
     }
+    
+    public void deleteAlergia(int id){
+    	Alergia alergiadeletada = entityManager.find(Alergia.class,id);
+        entityManager.getTransaction().begin();
+        entityManager.remove(alergiadeletada);
+        entityManager.getTransaction().commit();
+    }
+    
+    public Alergia alterarAlergia(Alergia alergia){
+        entityManager.getTransaction().begin();
+        Alergia alergiaAlterada = entityManager.merge(alergia);
+        entityManager.getTransaction().commit();
+        return alergiaAlterada;
+    } 
 }

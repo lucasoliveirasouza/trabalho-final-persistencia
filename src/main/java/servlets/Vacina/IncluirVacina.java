@@ -3,6 +3,8 @@ package servlets.Vacina;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.persistence.EntityManager;
+
 import dao.VacinaDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,11 +12,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import models.Vacina;
+import util.JPAUtil;
 
 
 @WebServlet("/IncluirVacina")
 public class IncluirVacina  extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private EntityManager en;
     
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -28,8 +32,9 @@ public class IncluirVacina  extends HttpServlet {
         	
        	Vacina vacina = new Vacina(titulo, descricao, doses, periodicidade,intervalo);
         	
-       	VacinaDao vdao = new VacinaDao(); 
-       	vdao.incluir(vacina);
+       	en = JPAUtil.getEntityManager();
+    	VacinaDao vacinaDao = new VacinaDao(en);
+    	vacinaDao.incluir(vacina);
     	 
        	response.sendRedirect("ListarVacinas");
     }

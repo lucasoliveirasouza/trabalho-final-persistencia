@@ -2,6 +2,8 @@ package servlets.Vacina;
 
 import java.io.IOException;
 
+import javax.persistence.EntityManager;
+
 import dao.VacinaDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,15 +11,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import models.Vacina;
+import util.JPAUtil;
 
 @WebServlet("/AlterarVacina")
 public class AlterarVacina extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-    private VacinaDao vacinaDao;
+    private EntityManager en;
 
-    public void init() {
-    	vacinaDao = new VacinaDao();
-    }
+    
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     	throws ServletException, IOException {
@@ -30,8 +31,9 @@ public class AlterarVacina extends HttpServlet{
         	
        	Vacina vacina = new Vacina(id,titulo, descricao, doses, periodicidade,intervalo);
         	
-       	VacinaDao vdao = new VacinaDao(); 
-       	vdao.alterarVacina(vacina);
+       	en = JPAUtil.getEntityManager();
+    	VacinaDao vacinaDao = new VacinaDao(en);
+    	vacinaDao.alterarVacina(vacina);
     	 
        	response.sendRedirect("ListarVacinas");
     	

@@ -15,144 +15,57 @@ import util.HibernateUtil;
 
 public class UsuarioDao {
 	
-	
-	public void incluirUsuario(Usuario usuario){
-		
-		Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-        	
-            // start a transaction
-            transaction = session.beginTransaction();
-            
-            session.save(usuario);
-            // commit transaction
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        } 
-	}
-	
-	
-    public List <Usuario> getAllUsuarios() {
-
-        Transaction transaction = null;
-        List <Usuario> listaUsuario = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            
-            transaction = session.beginTransaction();
-            
-            listaUsuario  = session.createQuery("from Usuario").getResultList();
-
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-        return listaUsuario;
+	private EntityManager entityManager;
+    public UsuarioDao(EntityManager entityManager){
+        this.entityManager = entityManager;
     }
     
-    public List <Alergia> getAllAlergiaUsuarios(int id) {
-
-        Transaction transaction = null;
-        List <Alergia> listaAlergiasUser = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            
-            transaction = session.beginTransaction();
-            
-            Query query =session.createQuery("Select p from Alergia p join fetch p.usuarios f where f.id=:id");
-            query.setParameter("id", id);
-            
-            listaAlergiasUser  = query.getResultList();
-
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-        return listaAlergiasUser;
+    public void incluirUsuario(Usuario usuario){
+        entityManager.getTransaction().begin();
+        entityManager.persist(usuario);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
     
-    public void deleteUsuario(int id) {
-
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-
-            Usuario usuario = session.get(Usuario.class, id);
-            if (usuario != null) {
-                session.delete(usuario);
-            }
-
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
+    public List<Usuario> getAllUsuarios(){
+        entityManager.getTransaction().begin();
+        List<Usuario> usuarios = entityManager.createQuery("select u from Usuario as u").getResultList();
+        entityManager.getTransaction().commit();
+        return usuarios;
     }
     
-    public void alterarUsuario(Usuario usuario) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            session.update(usuario);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-    }
-    
-    public Usuario getUsuario(int id) {
-
-        Transaction transaction = null;
-        Usuario usuario = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // start a transaction
-            transaction = session.beginTransaction();
-            usuario = session.get(Usuario.class, id);
-            // commit transaction
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
+    public Usuario getUsuario(int id){
+        entityManager.getTransaction().begin();
+        Usuario usuario = entityManager.find(Usuario.class,id);
+        entityManager.getTransaction().commit();
         return usuario;
     }
     
+    public void deleteUsuario(int id){
+    	Usuario usuarioDeletado = entityManager.find(Usuario.class,id);
+        entityManager.getTransaction().begin();
+        entityManager.remove(usuarioDeletado);
+        entityManager.getTransaction().commit();
+    }
+    
+    public Usuario alterarUsuario(Usuario usuario){
+        entityManager.getTransaction().begin();
+        Usuario usuarioAlterado = entityManager.merge(usuario);
+        entityManager.getTransaction().commit();
+        return usuarioAlterado;
+    } 
+    
+    
     public List <Agenda> getAllAgendasUsuario(int id) {
 
-        Transaction transaction = null;
-        List <Agenda> listaAgendasUser = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            
-            transaction = session.beginTransaction();
-            
-            Query query =session.createQuery("Select a from Agenda a where a.usuario.id=:id");
-            query.setParameter("id", id);
-            
-            listaAgendasUser  = query.getResultList();
-
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
+    	List <Agenda> listaAgendasUser = null;
+    	entityManager.getTransaction().begin();
+    	listaAgendasUser = entityManager.createQuery("Select a from Agenda a where a.usuario.id=:id").setParameter("id", id).getResultList();
+        entityManager.getTransaction().commit();
         return listaAgendasUser;
     }
+    
+   
 
+	
 }
