@@ -1,0 +1,12 @@
+.show{
+	display: block;
+}
+
+.d-none{
+	display: none;
+}
+
+.invalido{
+	border-color: rgb(230, 113, 124);
+    background: rgb(251, 234, 236);
+}

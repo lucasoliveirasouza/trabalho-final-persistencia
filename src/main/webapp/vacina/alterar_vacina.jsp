@@ -16,6 +16,8 @@
 <title>Alterar Vacina</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+<link rel="stylesheet" href="css/geral.css">
 </head>
 <body>
 	<style>
@@ -28,8 +30,8 @@
 	<div class="w-100 mb-4" style="background: rgba(0, 0, 0, 0.05);">
 		<h1 class="mx-3">Alterar Vacina</h1>
 	</div>
-	<div class="container-fluid">
-		<form action="AlterarVacina" method="POST">
+	<div class="container-fluid" id="container">
+		<form id="form0" action="AlterarVacina" method="POST">
 			<div class="row">
 					<div class="form-group col-md-2">
 						<label>Id:</label>
@@ -38,17 +40,17 @@
 					
 					<div class="form-group col-md-4">
 						<label>Titulo:</label>
-						<input class="form-control" type="text" value="<%=vacina.getTitulo()%>" name="txtTitulo" />
+						<input id="titulo" class="form-control" type="text" value="<%=vacina.getTitulo()%>" name="txtTitulo" />
 					</div>
 					
 					<div class="form-group col-md-6">
 						<label>Descricao:</label>
-						<input class="form-control" type="text" value="<%=vacina.getDescricao()%>" name="txtDescricao" />
+						<input id="descricao" class="form-control" type="text" value="<%=vacina.getDescricao()%>" name="txtDescricao" />
 					</div>
 					
 					<div class="form-group col-md-4">
 						<label>Doses:</label>
-						<input class="form-control" type="text" value="<%=vacina.getDoses()%>" name="txtDoses" />
+						<input id="doses" class="form-control" type="text" value="<%=vacina.getDoses()%>" name="txtDoses" />
 					</div>
 					
 					<div class="form-group col-md-4">
@@ -79,7 +81,7 @@
 					
 					<div class="form-group col-md-4">
 						<label>Intervalo:</label>
-						<input class="form-control" type="text" value="<%=vacina.getIntervalo()%>" name="txtIntervalo" />
+						<input id="intervalo" class="form-control" type="text" value="<%=vacina.getIntervalo()%>" name="txtIntervalo" />
 					</div>					
 				</div>
 				<br>
@@ -87,11 +89,66 @@
 					<i class="fas fa-arrow-left me-1"></i>
 					Voltar ao menu
 				</a>
-				<button class="btn btn-primary mt-3" type="submit">
+				<button class="btn btn-primary mt-3" type="button" onclick="aoAlterarVacina(this)">
 					Gravar
 					<i class="fas fa-save mx-1"></i>
 				</button>
 		</form>
 	</div>	
+	
+	<script defer>
+	const ehCampoValido = {
+			"titulo": () => {
+				const titulo = document.getElementById('titulo');
+				if(!titulo.value.trim()){
+					monteMensagem(titulo, 'Titulo', 'É necessário informar o titulo');
+					return false;
+				}
+				removaEstadoInvalido(titulo);
+				return true;
+			},
+			"descricao": () => {
+				const descricao = document.getElementById('descricao');
+				if(!descricao.value.trim()){
+					monteMensagem(descricao, 'Descrição', 'É necessário informar a descrição');
+					return false;
+				}
+				removaEstadoInvalido(descricao);
+				return true;
+			},
+			"doses": () => {
+				const doses = document.getElementById('doses');
+				if(!doses.value.trim()){
+					monteMensagem(doses, 'Doses', 'É necessário informar a quantidade de doses');
+					return false;
+				}
+				removaEstadoInvalido(doses);
+				return true;
+			},
+			"intervalo": () => {
+				const intervalo = document.getElementById('intervalo');
+				if(!intervalo.value.trim()){
+					monteMensagem(intervalo, 'Intervalo', 'É necessário informar o tempo de intervalo');
+					return false;
+				}
+				removaEstadoInvalido(intervalo);
+				return true;
+			}
+	};
+	
+		function aoAlterarVacina(ev){
+			let invalido;
+			if(!ehCampoValido["titulo"]()) invalido = true;
+			if(!ehCampoValido["descricao"]())invalido = true;
+			if(!ehCampoValido["doses"]())invalido = true;
+			if(!ehCampoValido["intervalo"]())invalido = true;
+			if(invalido) return;
+			
+			const formulario = document.getElementById('form0');
+			formulario.submit();
+		}
+	</script>
+	<script src="js/modal.js" crossorigin="anonymous"></script>
+	<script src="js/geral.js" crossorigin="anonymous"></script>
 </body>
 </html>

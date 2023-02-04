@@ -28,6 +28,7 @@
 		<% if (request.getAttribute("mensagem") != null) {%>
 			<p style="color:red"><%=request.getAttribute("mensagem") %></p>
 		<%} %>
+		
 		<div class="row mb-5" style="background: rgba(0, 0, 0, 0.05);">
 			<div class="col-md-9">
 				<h1>Controle de Vacinas</h1>
