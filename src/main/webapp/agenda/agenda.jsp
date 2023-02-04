@@ -34,7 +34,7 @@
 		<% if (request.getAttribute("mensagem") != null) {%>
 			<text>
 				<script>
-					Modal.renderSucesso('Alergia', '<%=request.getAttribute("mensagem")%>');				
+					Modal.renderSucesso('Agenda', '<%=request.getAttribute("mensagem")%>');				
 				</script>
 			</text>
 		<%} %>
