@@ -11,7 +11,7 @@ import org.hibernate.query.Query;
 import models.Agenda;
 import models.Alergia;
 import models.Usuario;
-import util.HibernateUtil;
+
 
 public class UsuarioDao {
 	
@@ -41,11 +41,23 @@ public class UsuarioDao {
         return usuario;
     }
     
-    public void deleteUsuario(int id){
-    	Usuario usuarioDeletado = entityManager.find(Usuario.class,id);
-        entityManager.getTransaction().begin();
-        entityManager.remove(usuarioDeletado);
-        entityManager.getTransaction().commit();
+    public String deleteUsuario(int id){
+    	
+        
+        String retorno = null;
+        try {
+        	Usuario usuarioDeletado = entityManager.find(Usuario.class,id);
+            entityManager.getTransaction().begin();
+            entityManager.remove(usuarioDeletado);
+            entityManager.getTransaction().commit();
+            retorno = usuarioDeletado.getNome();
+          } catch(Exception ex) {
+            entityManager.getTransaction().rollback();
+          } finally {
+            entityManager.close();
+          }
+        
+        return retorno;
     }
     
     public Usuario alterarUsuario(Usuario usuario){

@@ -26,8 +26,17 @@ public class ExcluirVacina extends HttpServlet{
     	int id = Integer.parseInt(request.getParameter("id"));
     	en = JPAUtil.getEntityManager();
     	VacinaDao vacinaDao = new VacinaDao(en);
-    	vacinaDao.deleteVacina(id);;
-        response.sendRedirect("ListarVacinas");
+        
+        String retorno = vacinaDao.deleteVacina(id);
+    	
+    	if(retorno != null) {
+    		String mensagem = "A vacina " + retorno + " foi excluída com sucesso!";
+  		  
+    		response.sendRedirect("ListarVacinas?mensagem="+mensagem);
+    	}else {
+    		String mensagem = "A vacina não pode ser deletada!";
+    		response.sendRedirect("ListarVacinas?mensagem="+mensagem);
+    	}
     }
 
 }

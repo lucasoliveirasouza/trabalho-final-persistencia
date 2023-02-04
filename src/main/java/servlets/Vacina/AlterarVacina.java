@@ -34,8 +34,12 @@ public class AlterarVacina extends HttpServlet{
        	en = JPAUtil.getEntityManager();
     	VacinaDao vacinaDao = new VacinaDao(en);
     	vacinaDao.alterarVacina(vacina);
-    	 
-       	response.sendRedirect("ListarVacinas");
+    	
+    	String mensagem = "A vacina " + titulo + " foi alterada com sucesso!";
+		  
+		response.sendRedirect("ListarVacinas?mensagem="+mensagem);
+		
+       
     	
     }
 }

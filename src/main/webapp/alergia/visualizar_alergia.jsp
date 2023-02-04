@@ -39,10 +39,14 @@
 			</ul>
 		</div>
 	</div>
-	<a href="ListarAlergias" class="btn btn-secondary mt-3">
-		<i class="fas fa-arrow-left me-1"></i>
-		Voltar ao menu
-	</a>
+	
+	<div class = "text-center mb-3 mt-4">
+		<a href="ListarAlergias" class="btn btn-secondary mt-3">
+			<i class="fas fa-arrow-left me-1"></i>
+			Voltar ao menu
+		</a>
+	</div>
+	
 </div>
 	
 </body>

@@ -8,9 +8,10 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import models.Agenda;
+import models.Alergia;
 import models.Usuario;
 import models.Vacina;
-import util.HibernateUtil;
+
 
 public class AgendaDao {
 	
@@ -59,11 +60,23 @@ public class AgendaDao {
         return agenda;
     }
     
-    public void deleteAgenda(int id){
-    	Agenda agendadeletada = entityManager.find(Agenda.class,id);
-        entityManager.getTransaction().begin();
-        entityManager.remove(agendadeletada);
-        entityManager.getTransaction().commit();
+    public String deleteAgenda(int id){
+    	
+        
+        String retorno = null;
+        try {
+        	Agenda agendadeletada = entityManager.find(Agenda.class,id);
+            entityManager.getTransaction().begin();
+            entityManager.remove(agendadeletada);
+            entityManager.getTransaction().commit();
+            retorno = "Deletada";
+          } catch(Exception ex) {
+            entityManager.getTransaction().rollback();
+          } finally {
+            entityManager.close();
+          }
+        
+        return retorno;
     }
     
     public Agenda alterarAgenda(Agenda agenda){
@@ -73,36 +86,7 @@ public class AgendaDao {
         return agendaAlterada;
     } 
     
-    public List<Usuario> getAllUsuarios(){
-        entityManager.getTransaction().begin();
-        List<Usuario> usuarios = entityManager.createQuery("select u from Usuario as u").getResultList();
-        entityManager.getTransaction().commit();
-        return usuarios;
-    }
     
-    public List<Vacina> getAllVacinas(){
-        entityManager.getTransaction().begin();
-        List<Vacina> vacinas = entityManager.createQuery("select v from Vacina as v").getResultList();
-        entityManager.getTransaction().commit();
-        
-        return vacinas;
-    }
-    
-    
-    public Usuario getUsuario(int id){
-        entityManager.getTransaction().begin();
-        Usuario usuario = entityManager.find(Usuario.class,id);
-        entityManager.getTransaction().commit();
-        return usuario;
-    }
-    
-    public Vacina getVacina(int id){
-        entityManager.getTransaction().begin();
-        Vacina vacina = entityManager.find(Vacina.class,id);
-        entityManager.getTransaction().commit();
-        return vacina;
-    }
-
     
     
     

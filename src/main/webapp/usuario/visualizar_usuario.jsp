@@ -61,25 +61,27 @@
 					<li>Sexo: Feminino</li>
 					
 				<%} %>
+				
 					
 					<li>Data de nascimento: <%=dateFormat.format(usuario.getData_nascimento())%></li>
 					<li>Endereço: <%=usuario.getLogradouro() + ", "+ usuario.getNumero() + ", "+usuario.getSetor() + ", " + usuario.getCidade() + " - " + usuario.getUf()%></li>
-				</ul>
-				<div >
+					<br>
 					<% if (usuario.getAlergias().isEmpty()) {%>
-						<h5>O usuário não possui alergias</h5>
+						<li><strong>O usuário não possui alergias</strong><li>
 					<%}else{%>
-						<h5>O usuário possui as seguintes alergias:</h5>
-						<table class="table">
+						<li><strong>O usuário possui as seguintes alergias:</strong><li>
+						
 							
 						<% for(Alergia alergia : usuario.getAlergias()) { %>
-							<tr>
-								<td><%=alergia.getNome()%></td>
-							</tr>
+							<li>* <%=alergia.getNome()%><li>
+							
 					<% } %>
 					
-						</table>
 					<%} %>
+					
+				</ul>
+				<div >
+					
 				</div>
 				
 				<div class="row">
@@ -105,8 +107,7 @@
 			</div>
 		</form>
 	</div>	
-	<br/>
-	<br/>
+	
 	
 	
 	
@@ -116,7 +117,7 @@
 			Voltar ao menu
 		</a>
 		
-		<a href="ListarAgendamentos?id=<%=usuario.getId()%>" class="btn btn-primary mt-3">
+		<a href="ListarAgendamentos?id=<%=usuario.getId()%>" class="btn btn-success mt-3">
 			Visualizar Agendas
 		</a>
 	</div>

@@ -28,8 +28,10 @@ public class ListarAlergias extends HttpServlet{
     	AlergiaDao alergiaDao = new AlergiaDao(en);
     	List <Alergia> listaAlergia = alergiaDao.getAllAlergias();
         request.setAttribute("lista", listaAlergia);
+        request.setAttribute("mensagem", request.getParameter("mensagem"));
         RequestDispatcher dispatcher = request.getRequestDispatcher("alergia/alergia.jsp");
         dispatcher.forward(request, response);
+       
     }
 
 }

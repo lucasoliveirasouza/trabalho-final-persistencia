@@ -23,7 +23,16 @@ public class ExcluirAlergia extends HttpServlet{
     	
     	en = JPAUtil.getEntityManager();
     	AlergiaDao alergiaDao = new AlergiaDao(en);
-    	alergiaDao.deleteAlergia(id);;
-        response.sendRedirect("ListarAlergias");
+    	String retorno = alergiaDao.deleteAlergia(id);
+    	
+    	if(retorno != null) {
+    		String mensagem = "A alergia " + retorno + " foi excluída com sucesso!";
+  		  
+    		response.sendRedirect("ListarAlergias?mensagem="+mensagem);
+    	}else {
+    		String mensagem = "A alergia não pode ser deletada!";
+    		response.sendRedirect("ListarAlergias?mensagem="+mensagem);
+    	}
+    	
     }
 }

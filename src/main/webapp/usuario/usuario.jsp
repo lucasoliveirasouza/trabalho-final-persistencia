@@ -27,9 +27,7 @@
 		}
 	</style>
 	<div class="container-fluid">	
-		<% if (request.getAttribute("mensagem") != null) {%>
-			<p style="color:red"><%=request.getAttribute("mensagem") %></p>
-		<%} %>
+		
 		
 		<div class="row mb-5" style="background: rgba(0, 0, 0, 0.05);">
 			<div class="col-md-9">
@@ -42,6 +40,9 @@
 				</a>	
 			</div>
 		</div>
+		<% if (request.getAttribute("mensagem") != null) {%>
+			<p style="color:red"><%=request.getAttribute("mensagem") %></p>
+		<%} %>
 		<table class="table table-striped">
 			<tr>
 				<td>Código</td>

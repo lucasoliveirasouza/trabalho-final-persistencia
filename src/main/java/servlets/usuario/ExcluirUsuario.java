@@ -22,7 +22,17 @@ public class ExcluirUsuario  extends HttpServlet{
     	int id = Integer.parseInt(request.getParameter("id"));
     	en = JPAUtil.getEntityManager();
     	UsuarioDao usuarioDao = new UsuarioDao(en);
-    	usuarioDao.deleteUsuario(id);;
-        response.sendRedirect("ListarUsuarios");
+    	
+        
+        String retorno = usuarioDao.deleteUsuario(id);
+    	
+    	if(retorno != null) {
+    		String mensagem = "O usuário " + retorno + " foi excluído com sucesso!";
+  		  
+    		response.sendRedirect("ListarUsuarios?mensagem="+mensagem);
+    	}else {
+    		String mensagem = "O usuário não pode ser deletado!";
+    		response.sendRedirect("ListarUsuarios?mensagem="+mensagem);
+    	}
     }
 }

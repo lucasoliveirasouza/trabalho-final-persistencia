@@ -22,7 +22,7 @@ public class ExcluirAgenda extends HttpServlet{
     	int id = Integer.parseInt(request.getParameter("id"));
     	en = JPAUtil.getEntityManager();
     	AgendaDao agendaDao = new AgendaDao(en);
-    	agendaDao.deleteAgenda(id);;
+    	agendaDao.deleteAgenda(id);
         response.sendRedirect("ListarAgendas?tipo=1");
     }
 }

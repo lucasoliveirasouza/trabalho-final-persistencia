@@ -55,13 +55,14 @@ public class IncluirUsuario extends HttpServlet{
         	
        	en = JPAUtil.getEntityManager();
     	UsuarioDao usuarioDao = new UsuarioDao(en);
-    	AlergiaDao alergiaDao = new AlergiaDao(en);
-    	Alergia alergia = alergiaDao.getAlergia(5);
     	
-    	alergias.add(alergia);
     	Usuario usuario = new Usuario(nome, data,sexo, logradouro, numero, setor, cidade, uf, alergias);
        	usuarioDao.incluirUsuario(usuario);
+       	
+       	String mensagem = "O usuário " + nome + " foi incluido com sucesso!";
+		  
+		response.sendRedirect("ListarUsuarios?mensagem="+mensagem);
     	 
-       	response.sendRedirect("ListarUsuarios");
+       	
     }
 }

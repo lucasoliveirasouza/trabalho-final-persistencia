@@ -50,11 +50,13 @@
 			</ul>
 		</div>
 	</div>	
+	<div class = "text-center mb-3 mt-4">
+		<a href="ListarVacinas" class="btn btn-secondary mt-3">
+			<i class="fas fa-arrow-left me-1"></i>
+			Voltar ao menu
+		</a>
+	</div>
 	
-	<a href="ListarVacinas" class="btn btn-secondary mt-3">
-		<i class="fas fa-arrow-left me-1"></i>
-		Voltar ao menu
-	</a>
 </div>
 	
 </body>

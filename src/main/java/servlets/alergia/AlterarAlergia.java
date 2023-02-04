@@ -34,7 +34,9 @@ public class AlterarAlergia  extends HttpServlet{
     	AlergiaDao alergiaDao = new AlergiaDao(en);
        	alergiaDao.alterarAlergia(alergia);
     	 
-       	response.sendRedirect("ListarAlergias");
+       	String mensagem = "A alergia " + nome + " foi alterada com sucesso!";
+		  
+		response.sendRedirect("ListarAlergias?mensagem="+mensagem);
     	
     }
 }

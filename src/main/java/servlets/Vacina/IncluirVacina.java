@@ -36,9 +36,11 @@ public class IncluirVacina  extends HttpServlet {
        	en = JPAUtil.getEntityManager();
     	VacinaDao vacinaDao = new VacinaDao(en);
     	vacinaDao.incluir(vacina);
-    	 
-
-       	response.sendRedirect("ListarVacinas");
+       	
+    	String mensagem = "A vacina " + titulo + " foi incluída!";
+		  
+		response.sendRedirect("ListarVacinas?mensagem="+mensagem);
+    
     }
 
 }

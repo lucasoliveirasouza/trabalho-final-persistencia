@@ -7,9 +7,9 @@ import javax.persistence.EntityManager;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-
+import models.Alergia;
 import models.Vacina;
-import util.HibernateUtil;
+
 
 public class VacinaDao {
 	
@@ -40,11 +40,23 @@ public class VacinaDao {
         return vacina;
     }
     
-    public void deleteVacina(int id){
-        Vacina vacinadel = entityManager.find(Vacina.class,id);
-        entityManager.getTransaction().begin();
-        entityManager.remove(vacinadel);
-        entityManager.getTransaction().commit();
+    public String deleteVacina(int id){
+        
+        
+        String retorno = null;
+        try {
+        	Vacina vacinadel = entityManager.find(Vacina.class,id);
+            entityManager.getTransaction().begin();
+            entityManager.remove(vacinadel);
+            entityManager.getTransaction().commit();
+            retorno = vacinadel.getTitulo();
+          } catch(Exception ex) {
+            entityManager.getTransaction().rollback();
+          } finally {
+            entityManager.close();
+          }
+        
+        return retorno;
     }
     
     public Vacina alterarVacina(Vacina vacina){

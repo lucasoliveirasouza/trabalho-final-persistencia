@@ -9,7 +9,7 @@ import org.hibernate.Transaction;
 
 import models.Alergia;
 
-import util.HibernateUtil;
+
 
 public class AlergiaDao {
 	
@@ -40,11 +40,21 @@ public class AlergiaDao {
         return alergia;
     }
     
-    public void deleteAlergia(int id){
-    	Alergia alergiadeletada = entityManager.find(Alergia.class,id);
-        entityManager.getTransaction().begin();
-        entityManager.remove(alergiadeletada);
-        entityManager.getTransaction().commit();
+    public String deleteAlergia(int id){
+    	String retorno = null;
+        try {
+        	Alergia alergiadeletada = entityManager.find(Alergia.class,id);
+            entityManager.getTransaction().begin();
+            entityManager.remove(alergiadeletada);
+            entityManager.getTransaction().commit();
+            retorno = alergiadeletada.getNome();
+          } catch(Exception ex) {
+            entityManager.getTransaction().rollback();
+          } finally {
+            entityManager.close();
+          }
+        
+        return retorno;
     }
     
     public Alergia alterarAlergia(Alergia alergia){

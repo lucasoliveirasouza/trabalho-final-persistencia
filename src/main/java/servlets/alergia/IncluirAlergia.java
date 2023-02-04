@@ -33,8 +33,10 @@ public class IncluirAlergia extends HttpServlet{
     	
        
        	alergiaDao.incluirAlergia(alergia);
-    	 
-       	response.sendRedirect("ListarAlergias");
+       	
+       	String mensagem = "A alergia " + nome + " foi incluida!!!";
+		  
+		response.sendRedirect("ListarAlergias?mensagem="+mensagem);
     }
 
 }
