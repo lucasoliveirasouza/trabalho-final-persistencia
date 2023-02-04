@@ -3,6 +3,9 @@
 <%@page import="models.Alergia" %>
 <%@page import="dao.AlergiaDao" %>
 <%@page import="java.util.List"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -13,6 +16,7 @@
 
 	AlergiaDao alergiaDao = new AlergiaDao();
 	List<Alergia> alergias = alergiaDao.getAllAlergias();
+	DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 %>
 
 <html>
@@ -48,6 +52,9 @@
 			<%}else{%>
 				<li>Sexo: Feminino</li>
 			<%} %>
+				
+				<li>Data de nascimento: <%=dateFormat.format(usuario.getData_nascimento())%></li>
+				<li>Endereço: <%=usuario.getLogradouro() + ", "+ usuario.getNumero() + ", "+usuario.getSetor() + ", " + usuario.getCidade() + " - " + usuario.getUf()%></li>
 			</ul>
 			
 			<div >
@@ -72,7 +79,7 @@
 	<br/>
 	<br/>
 	
-	<div class="row">
+	 <div class="row">
 		<div class="col-md-3 form-group">
 					<label>Alergia:</label>
 					<select name="selAlergia" class="form-control">
@@ -88,11 +95,17 @@
 		</div>
 	</div>
 	
+	<div class = "text-center mb-3 mt-4">
+		<a href="ListarUsuarios" class="btn btn-secondary mt-3">
+			<i class="fas fa-arrow-left me-1"></i>
+			Voltar ao menu
+		</a>
+		
+		<a href="ListarAgendamentos?id=<%=usuario.getId()%>" class="btn btn-primary mt-3">
+			Visualizar Agendas
+		</a>
+	</div>
 	
-	<a href="ListarUsuarios" class="btn btn-secondary mt-3">
-		<i class="fas fa-arrow-left me-1"></i>
-		Voltar ao menu
-	</a>
 </div>
 	
 </body>

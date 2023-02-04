@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import models.Agenda;
 import models.Alergia;
 import models.Usuario;
 import util.HibernateUtil;
@@ -129,6 +130,29 @@ public class UsuarioDao {
             e.printStackTrace();
         }
         return usuario;
+    }
+    
+    public List <Agenda> getAllAgendasUsuario(int id) {
+
+        Transaction transaction = null;
+        List <Agenda> listaAgendasUser = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            
+            transaction = session.beginTransaction();
+            
+            Query query =session.createQuery("Select a from Agenda a where a.usuario.id=:id");
+            query.setParameter("id", id);
+            
+            listaAgendasUser  = query.getResultList();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return listaAgendasUser;
     }
 
 }
