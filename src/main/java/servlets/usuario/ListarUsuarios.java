@@ -30,7 +30,7 @@ public class ListarUsuarios extends HttpServlet{
     	List <Usuario> listaUsuario = usuarioDao.getAllUsuarios();
         request.setAttribute("lista", listaUsuario);
         request.setAttribute("mensagem", request.getParameter("mensagem"));
-        RequestDispatcher dispatcher = request.getRequestDispatcher("usuario/usuario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/usuario/usuario.jsp");
         dispatcher.forward(request, response);
     }
 }

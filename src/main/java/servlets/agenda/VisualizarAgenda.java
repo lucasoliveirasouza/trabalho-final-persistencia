@@ -26,7 +26,7 @@ public class VisualizarAgenda extends HttpServlet{
     	AgendaDao agendaDao = new AgendaDao(en);
         Agenda agenda = agendaDao.getAgenda(id);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("agenda/alterar_agenda.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("views/agenda/alterar_agenda.jsp");
 		request.setAttribute("agenda", agenda);
 	
 		rd.forward(request, response);

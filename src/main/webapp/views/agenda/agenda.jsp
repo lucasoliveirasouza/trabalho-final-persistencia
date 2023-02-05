@@ -53,7 +53,7 @@
 				</div>
 			</div>
 			<div class="col-md-4">
-				<a href="agenda/incluir_agenda.jsp" class="btn btn-success">
+				<a href="views/agenda/incluir_agenda.jsp" class="btn btn-success">
 					Incluir agendamento
 					<i class="fas fa-plus mx-1"></i>
 				</a>	

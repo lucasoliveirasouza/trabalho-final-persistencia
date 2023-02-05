@@ -31,7 +31,7 @@ public class ListarAgendas extends HttpServlet{
     	List <Agenda> listaAgenda = agendaDao.getAllAgendas(tipo);
         request.setAttribute("lista", listaAgenda);
         request.setAttribute("mensagem", request.getParameter("mensagem"));
-        RequestDispatcher dispatcher = request.getRequestDispatcher("agenda/agenda.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/agenda/agenda.jsp");
         dispatcher.forward(request, response);
     }
 }

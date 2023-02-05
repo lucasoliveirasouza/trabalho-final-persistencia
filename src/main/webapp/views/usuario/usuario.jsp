@@ -34,7 +34,7 @@
 				<h1>Controle de usuarios</h1>
 			</div>
 			<div class="col-md-3 mt-2" style="width: 13%;margin-left: 10rem;">
-				<a href="usuario/incluir_usuario.html" class="btn btn-success">
+				<a href="views/usuario/incluir_usuario.html" class="btn btn-success">
 					Incluir usuario
 					<i class="fas fa-plus mx-1"></i>
 				</a>	

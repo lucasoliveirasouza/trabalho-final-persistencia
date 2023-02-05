@@ -29,7 +29,7 @@ public class BuscarAlergia extends HttpServlet{
     	
         Alergia alergia = alergiaDao.getAlergia(id);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("alergia/alterar_alergia.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("views/alergia/alterar_alergia.jsp");
 		request.setAttribute("alergia", alergia);
 	
 		rd.forward(request, response);

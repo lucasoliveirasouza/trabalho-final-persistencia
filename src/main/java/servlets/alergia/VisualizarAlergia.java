@@ -28,7 +28,7 @@ public class VisualizarAlergia extends HttpServlet{
     	
         Alergia alergia = alergiaDao.getAlergia(id);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("alergia/visualizar_alergia.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("views/alergia/visualizar_alergia.jsp");
 		request.setAttribute("alergia", alergia);
 	
 		rd.forward(request, response);

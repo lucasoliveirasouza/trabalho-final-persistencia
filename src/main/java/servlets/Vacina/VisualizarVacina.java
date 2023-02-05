@@ -28,7 +28,7 @@ public class VisualizarVacina extends HttpServlet{
     	VacinaDao vacinaDao = new VacinaDao(en);
 		Vacina vacina = vacinaDao.getVacina(id);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("vacina/visualizar_vacina.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("views/vacina/visualizar_vacina.jsp");
 		request.setAttribute("vacina", vacina);
 	
 		rd.forward(request, response);

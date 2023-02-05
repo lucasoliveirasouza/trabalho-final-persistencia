@@ -29,7 +29,7 @@ public class ListarVacinas  extends HttpServlet{
     	List <Vacina> listavacina = vacinaDao.getAllVacinas();
         request.setAttribute("lista", listavacina);
         request.setAttribute("mensagem", request.getParameter("mensagem"));
-        RequestDispatcher dispatcher = request.getRequestDispatcher("vacina/vacina.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/vacina/vacina.jsp");
         dispatcher.forward(request, response);
     }
 }
