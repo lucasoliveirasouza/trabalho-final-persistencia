@@ -16,9 +16,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-<link rel="stylesheet" href="css/geral.css">
-<script src="js/modal.js" crossorigin="anonymous"></script>
-<script src="js/geral.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="views/css/geral.css">
+<script src="views/js/modal.js" crossorigin="anonymous"></script>
+<script src="views/js/geral.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -36,7 +36,7 @@
 			</div>
 			
 			<div class="col-md-3 mt-2" style="width: 13%;margin-left: 10rem;">
-				<a href="alergia/incluir_alergia.html" class="btn btn-success">
+				<a href="views/alergia/incluir_alergia.html" class="btn btn-success">
 					Incluir alergia
 					<i class="fas fa-plus mx-1"></i>
 				</a>	

@@ -34,7 +34,7 @@ public class VisualizarUsuario extends HttpServlet{
     	
     	
         request.setAttribute("usuario", usuario);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("usuario/visualizar_usuario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/usuario/visualizar_usuario.jsp");
         dispatcher.forward(request, response);
     }
 }

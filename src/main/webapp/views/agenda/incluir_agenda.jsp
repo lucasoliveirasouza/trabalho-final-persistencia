@@ -38,7 +38,7 @@
 		<h1 class="mx-3">Incluir novo agendamento</h1>
 	</div>
 	<div class="container-fluid" id="container">
-		<form action="../IncluirAgenda" method="POST" id="form0">
+		<form action="../../IncluirAgenda" method="POST" id="form0">
 			<div class="row">
 				<div class="form-group col-md-4">
 					<label>Usuário:</label>
@@ -76,7 +76,7 @@
 			</div>
 			
 			<br>
-			<a href="../ListarAgendas?tipo=1" class="btn btn-secondary mt-3 me-2">
+			<a href="../../ListarAgendas?tipo=1" class="btn btn-secondary mt-3 me-2">
 				<i class="fas fa-arrow-left me-1"></i>
 				Voltar ao menu
 			</a>			

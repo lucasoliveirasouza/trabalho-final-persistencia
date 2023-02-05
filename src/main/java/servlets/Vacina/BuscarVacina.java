@@ -29,7 +29,7 @@ public class BuscarVacina extends HttpServlet{
     	VacinaDao vacinaDao = new VacinaDao(en);
         Vacina vacina = vacinaDao.getVacina(id);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("vacina/alterar_vacina.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("views/vacina/alterar_vacina.jsp");
 		request.setAttribute("vacina", vacina);
 	
 		rd.forward(request, response);
